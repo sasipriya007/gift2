@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Make A Wish 🤎</title>
+
+<!-- VINTAGE FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet">
+
+<!-- CONFETTI -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* BODY */
+
+body{
+
+    overflow:hidden;
+    height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+
+    background:
+    radial-gradient(circle at top,
+    #3b2a1f 0%,
+    #1c120d 50%,
+    #0d0806 100%);
+
+    position:relative;
+
+    font-family:'Caveat',cursive;
+}
+
+/* VINTAGE GRAIN */
+
+body::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+
+    opacity:0.14;
+
+    pointer-events:none;
+}
+
+/* STARS */
+
+.star{
+
+    position:absolute;
+
+    width:3px;
+    height:3px;
+
+    background:#fff7ed;
+
+    border-radius:50%;
+
+    animation:twinkle 3s infinite ease-in-out;
+}
+
+@keyframes twinkle{
+
+    0%,100%{
+        opacity:0.2;
+        transform:scale(1);
+    }
+
+    50%{
+        opacity:1;
+        transform:scale(2);
+    }
+}
+
+/* DUST */
+
+.dust{
+
+    position:absolute;
+
+    width:4px;
+    height:4px;
+
+    background:rgba(255,255,255,0.15);
+
+    border-radius:50%;
+
+    animation:floatDust linear infinite;
+}
+
+@keyframes floatDust{
+
+    from{
+        transform:translateY(100vh);
+    }
+
+    to{
+        transform:translateY(-100vh);
+    }
+}
+
+/* BACKGROUND GLOW */
+
+.glow{
+
+    position:absolute;
+
+    width:500px;
+    height:500px;
+
+    background:#d97706;
+
+    border-radius:50%;
+
+    filter:blur(140px);
+
+    opacity:0.18;
+}
+
+/* MAIN CONTAINER */
+
+.container{
+
+    position:relative;
+
+    z-index:5;
+
+    text-align:center;
+
+    animation:fadeIn 2s ease;
+}
+
+@keyframes fadeIn{
+
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* QUOTE */
+
+.quote{
+
+    color:#f8e7c9;
+
+    font-size:3rem;
+
+    font-family:'Special Elite',cursive;
+
+    text-shadow:
+    0 0 15px rgba(255,220,170,0.3);
+
+    margin-bottom:45px;
+
+    letter-spacing:2px;
+}
+
+/* CAKE AREA */
+
+.cake-area{
+
+    position:relative;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    margin-bottom:45px;
+}
+
+/* MAGIC GLOW */
+
+.magic-glow{
+
+    position:absolute;
+
+    width:260px;
+    height:60px;
+
+    background:#d97706;
+
+    border-radius:50%;
+
+    filter:blur(40px);
+
+    opacity:0.6;
+
+    bottom:-15px;
+}
+
+/* CAKE IMAGE */
+
+.cake{
+
+    width:400px;
+
+    animation:floatCake 3s infinite ease-in-out;
+
+    filter:
+    drop-shadow(0 0 35px rgba(255,220,170,0.2));
+
+    transition:1s;
+}
+
+/* FLOAT */
+
+@keyframes floatCake{
+
+    0%{
+        transform:translateY(0px);
+    }
+
+    50%{
+        transform:translateY(-10px);
+    }
+
+    100%{
+        transform:translateY(0px);
+    }
+}
+
+/* BUTTON */
+
+.blow-btn{
+
+    padding:16px 38px;
+
+    border:none;
+
+    border-radius:50px;
+
+    background:
+    linear-gradient(
+    to bottom,
+    #c08457,
+    #8b5e3c);
+
+    color:#fff7ed;
+
+    font-size:1.3rem;
+
+    font-family:'Special Elite',cursive;
+
+    cursor:pointer;
+
+    transition:0.4s;
+
+    box-shadow:
+    0 0 20px rgba(0,0,0,0.4);
+}
+
+.blow-btn:hover{
+
+    transform:scale(1.08);
+
+    box-shadow:
+    0 0 25px rgba(255,220,170,0.3);
+}
+
+/* MESSAGE */
+
+.message{
+
+    margin-top:40px;
+
+    color:#f8e7c9;
+
+    font-size:2.3rem;
+
+    opacity:0;
+
+    transition:1s;
+
+    text-shadow:
+    0 0 12px rgba(255,220,170,0.2);
+}
+
+.message.show{
+
+    opacity:1;
+}
+
+/* NEXT BUTTON */
+
+.next-btn{
+
+    margin-top:28px;
+
+    padding:15px 35px;
+
+    border:none;
+
+    border-radius:50px;
+
+    background:
+    linear-gradient(
+    to bottom,
+    #e0b07a,
+    #8b5e3c);
+
+    color:#fff7ed;
+
+    font-size:1.1rem;
+
+    font-family:'Special Elite',cursive;
+
+    cursor:pointer;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:1s;
+
+    box-shadow:
+    0 0 20px rgba(0,0,0,0.4);
+}
+
+.next-btn.show{
+
+    opacity:1;
+    pointer-events:auto;
+}
+
+.next-btn:hover{
+
+    transform:scale(1.08);
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    .quote{
+        font-size:2rem;
+    }
+
+    .cake{
+        width:240px;
+    }
+
+    .message{
+        font-size:1.7rem;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- GLOW -->
+<div class="glow"></div>
+
+<!-- STARS -->
+<script>
+
+for(let i=0;i<100;i++){
+
+    let star=document.createElement("div");
+
+    star.classList.add("star");
+
+    star.style.top=Math.random()*100+"%";
+
+    star.style.left=Math.random()*100+"%";
+
+    star.style.animationDuration=
+    (Math.random()*3+2)+"s";
+
+    document.body.appendChild(star);
+}
+
+</script>
+
+<!-- DUST -->
+<script>
+
+for(let i=0;i<60;i++){
+
+    let dust=document.createElement("div");
+
+    dust.classList.add("dust");
+
+    dust.style.left=Math.random()*100+"%";
+
+    dust.style.animationDuration=
+    (Math.random()*10+10)+"s";
+
+    dust.style.opacity=Math.random();
+
+    document.body.appendChild(dust);
+}
+
+</script>
+
+<!-- MAIN CONTENT -->
+
+<div class="container">
+
+    <!-- QUOTE -->
+
+    <div class="quote">
+
+        Close your eyes & make a wish 🤎✨
+
+    </div>
+
+    <!-- CAKE -->
+
+    <div class="cake-area">
+
+        <div class="magic-glow"></div>
+
+        <img src="cake.png"
+        class="cake"
+        id="cakeImg">
+
+    </div>
+
+    <!-- BUTTON -->
+
+    <button class="blow-btn"
+    onclick="blowCandles()">
+
+        Blow The Candles 🕯
+
+    </button>
+
+    <!-- MESSAGE -->
+
+    <div class="message"
+    id="message">
+
+        Your wish has been fulfilled ✨
+
+    </div>
+
+    <!-- NEXT -->
+
+    <button class="next-btn"
+    id="nextBtn"
+    onclick="nextPage()">
+
+        Open Your surprise 
+
+    </button>
+
+</div>
+
+<script>
+
+/* BLOW FUNCTION */
+
+function blowCandles(){
+
+    /* CHANGE CAKE */
+
+    document.getElementById("cakeImg")
+    .src = "cake2.png";
+
+    /* CONFETTI */
+
+    confetti({
+
+        particleCount:250,
+        spread:130,
+        origin:{ y:0.6 }
+
+    });
+
+    /* HIDE BUTTON */
+
+    document.querySelector(".blow-btn")
+    .style.display = "none";
+
+    /* SHOW MESSAGE */
+
+    document.getElementById("message")
+    .classList.add("show");
+
+    /* SHOW NEXT BUTTON */
+
+    document.getElementById("nextBtn")
+    .classList.add("show");
+}
+
+/* NEXT PAGE */
+
+function nextPage(){
+
+    window.location.href = "gift.html";
+}
+
+</script>
+<!-- HEART BUBBLES STYLE -->
+
+<style>
+
+.heart{
+
+    position:fixed;
+
+    bottom:-40px;
+
+    color:#d6a56f;
+
+    pointer-events:none;
+
+    z-index:999;
+
+    opacity:0;
+
+    animation:heartBubble linear forwards;
+
+    filter:
+    drop-shadow(0 0 10px rgba(255,220,170,0.4));
+}
+
+/* FLOATING EFFECT */
+
+@keyframes heartBubble{
+
+    0%{
+
+        transform:
+        translateY(0)
+        translateX(0)
+        scale(0.6);
+
+        opacity:0;
+    }
+
+    15%{
+        opacity:1;
+    }
+
+    50%{
+
+        transform:
+        translateY(-45vh)
+        translateX(20px)
+        scale(1);
+    }
+
+    100%{
+
+        transform:
+        translateY(-110vh)
+        translateX(-20px)
+        scale(1.4);
+
+        opacity:0;
+    }
+}
+
+</style>
+
+
+<!-- HEART BUBBLES SCRIPT -->
+
+<script>
+
+setInterval(()=>{
+
+    let heart =
+    document.createElement("div");
+
+    heart.classList.add("heart");
+
+    heart.innerHTML = "🤎";
+
+    /* RANDOM POSITION */
+
+    heart.style.left =
+    Math.random()*100 + "vw";
+
+    /* RANDOM SIZE */
+
+    heart.style.fontSize =
+    (Math.random()*25 + 15) + "px";
+
+    /* RANDOM SPEED */
+
+    heart.style.animationDuration =
+    (Math.random()*4 + 4) + "s";
+
+    document.body.appendChild(heart);
+
+    /* REMOVE */
+
+    setTimeout(()=>{
+
+        heart.remove();
+
+    },8000);
+
+},250);
+
+</script>
+
+</body>
+</html>
