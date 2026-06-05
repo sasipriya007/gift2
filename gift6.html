@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Happy Birthday 🤎</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* RESET */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* BODY */
+
+body{
+
+    min-height:100vh;
+
+    overflow:hidden;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+    radial-gradient(circle at top,
+    #3a261b 0%,
+    #1a120d 45%,
+    #090706 100%);
+
+    position:relative;
+
+    font-family:'Caveat',cursive;
+
+    padding:20px;
+}
+
+/* FILM GRAIN */
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+    url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+
+    opacity:0.18;
+
+    pointer-events:none;
+}
+
+/* GLOW */
+
+.glow{
+
+    position:absolute;
+
+    width:300px;
+    height:300px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(circle,
+    rgba(255,190,120,0.10),
+    transparent 70%);
+
+    filter:blur(40px);
+
+    z-index:0;
+}
+
+.glow1{
+
+    top:-100px;
+    left:-100px;
+}
+
+.glow2{
+
+    bottom:-100px;
+    right:-100px;
+}
+
+/* FLOATING HEARTS */
+
+.heart{
+
+    position:absolute;
+
+    color:#f4d3b4;
+
+    opacity:0.45;
+
+    pointer-events:none;
+
+    animation:floatHeart linear forwards;
+
+    z-index:1;
+}
+
+@keyframes floatHeart{
+
+    0%{
+
+        transform:
+        translateY(0)
+        scale(0.8);
+
+        opacity:0;
+    }
+
+    20%{
+        opacity:0.6;
+    }
+
+    100%{
+
+        transform:
+        translateY(-110vh)
+        translateX(30px)
+        scale(1.5);
+
+        opacity:0;
+    }
+}
+
+/* CARD */
+
+.card{
+
+    width:520px;
+
+    max-width:80%;
+
+    padding:40px 32px;
+
+    background:
+    rgba(244,231,213,0.08);
+
+    border:
+    1px solid rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(12px);
+
+    border-radius:18px;
+
+    position:relative;
+
+    text-align:center;
+
+    box-shadow:
+    0 20px 50px rgba(0,0,0,0.5);
+
+    animation:fadeUp 1.5s ease;
+
+    z-index:5;
+}
+
+/* TAPE */
+
+.tape{
+
+    position:absolute;
+
+    width:120px;
+    height:30px;
+
+    background:
+    rgba(255,240,210,0.25);
+
+    border:
+    1px solid rgba(255,255,255,0.12);
+
+    top:-14px;
+
+    left:50%;
+
+    transform:
+    translateX(-50%)
+    rotate(-3deg);
+
+    backdrop-filter:blur(4px);
+}
+
+/* TITLE */
+
+.title{
+
+    font-family:'Playfair Display',serif;
+
+    font-size:3.2rem;
+
+    color:#f7e6d2;
+
+    margin-bottom:18px;
+
+    text-shadow:
+    0 0 15px rgba(255,220,180,0.08);
+}
+
+/* MESSAGE */
+
+.message{
+
+    color:#e0c7af;
+
+    font-size:1.5rem;
+
+    line-height:1.7;
+
+    letter-spacing:1px;
+}
+
+/* SIGN */
+
+.sign{
+
+    margin-top:24px;
+
+    color:#c9ac90;
+
+    font-size:1.3rem;
+
+    opacity:0.9;
+}
+
+/* ANIMATION */
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:
+        translateY(40px);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+        translateY(0);
+    }
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    .card{
+
+        width:90%;
+
+        padding:35px 22px;
+    }
+
+    .title{
+
+        font-size:2.2rem;
+    }
+
+    .message{
+
+        font-size:1.2rem;
+
+        line-height:1.6;
+    }
+
+    .sign{
+
+        font-size:1rem;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="glow glow1"></div>
+<div class="glow glow2"></div>
+
+<!-- FLOATING HEARTS -->
+
+<script>
+
+setInterval(()=>{
+
+    const heart=document.createElement("div");
+
+    heart.classList.add("heart");
+
+    heart.innerHTML="🤎";
+
+    heart.style.left=
+    Math.random()*100+"%";
+
+    heart.style.bottom="-20px";
+
+    heart.style.fontSize=
+    (Math.random()*16+13)+"px";
+
+    heart.style.animationDuration=
+    (Math.random()*4+5)+"s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+
+        heart.remove();
+
+    },8000);
+
+},700);
+
+</script>
+
+<!-- CARD -->
+
+<div class="card">
+
+    <div class="tape"></div>
+
+    <div class="title">
+        Once again Happy Birthday ✨
+    </div>
+
+    <div class="message">
+
+        thank you for being one of
+        the most beautiful parts
+        of my life 🤎
+
+        <br><br>
+
+        every little memory with you
+        became something special ✨
+
+    </div>
+
+    <div class="sign">
+        made with love & memories 🎞
+    </div>
+
+</div>
+
+</body>
+</html>

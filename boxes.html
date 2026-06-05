@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Choose Your Gift 🤎</title>
+
+<!-- VINTAGE FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet">
+
+<style>
+
+/* RESET */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* BODY */
+
+body{
+
+    min-height:100vh;
+
+    overflow:hidden;
+
+    font-family:'Caveat',cursive;
+
+    background:
+    radial-gradient(circle at top,
+    #3b2a1f 0%,
+    #1c120d 50%,
+    #0d0806 100%);
+
+    position:relative;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+}
+
+/* VINTAGE GRAIN */
+
+body::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+
+    opacity:0.15;
+
+    pointer-events:none;
+}
+
+/* TITLE */
+
+h1{
+
+    color:#f8e7c9;
+
+    font-size:2.5rem;
+
+    margin-bottom:50px;
+
+    font-family:'Special Elite',cursive;
+
+    text-shadow:
+    0 0 12px rgba(255,220,170,0.2);
+
+    z-index:10;
+
+    letter-spacing:2px;
+}
+
+/* STARS */
+
+.star{
+
+    position:absolute;
+
+    width:3px;
+    height:3px;
+
+    background:#fff7ed;
+
+    border-radius:50%;
+
+    animation:twinkle 3s infinite ease-in-out;
+}
+
+@keyframes twinkle{
+
+    0%,100%{
+        opacity:0.2;
+        transform:scale(1);
+    }
+
+    50%{
+        opacity:1;
+        transform:scale(2);
+    }
+}
+
+/* DUST */
+
+.dust{
+
+    position:absolute;
+
+    width:4px;
+    height:4px;
+
+    background:rgba(255,255,255,0.15);
+
+    border-radius:50%;
+
+    animation:floatDust linear infinite;
+}
+
+@keyframes floatDust{
+
+    from{
+        transform:translateY(100vh);
+    }
+
+    to{
+        transform:translateY(-100vh);
+    }
+}
+
+/* GRID */
+
+.gift-boxes{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3, 190px);
+
+    gap:45px;
+
+    z-index:10;
+}
+
+/* GIFT */
+
+.gift{
+
+    position:relative;
+
+    width:190px;
+    height:190px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    cursor:pointer;
+
+    transition:0.5s;
+
+    animation:floatGift 4s ease-in-out infinite;
+}
+
+/* FLOAT */
+
+@keyframes floatGift{
+
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-10px);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+}
+
+/* HOVER */
+
+.gift:hover{
+
+    transform:
+    scale(1.12)
+    rotate(4deg);
+
+    filter:
+    drop-shadow(0 0 25px rgba(255,220,170,0.3));
+}
+
+/* IMAGE */
+
+.gift img{
+
+    width:160px;
+    height:160px;
+
+    object-fit:contain;
+
+    transition:0.5s;
+
+    filter:
+    drop-shadow(0 0 15px rgba(255,220,170,0.15));
+}
+
+.gift:hover img{
+
+    transform:scale(1.1);
+}
+
+/* GLOW */
+
+.gift::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:120px;
+    height:30px;
+
+    background:#d97706;
+
+    border-radius:50%;
+
+    filter:blur(30px);
+
+    opacity:0.35;
+
+    bottom:15px;
+
+    z-index:-1;
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+    .gift-boxes{
+
+        grid-template-columns:
+        repeat(2, 150px);
+
+        gap:30px;
+    }
+
+    .gift{
+
+        width:150px;
+        height:150px;
+    }
+
+    .gift img{
+
+        width:125px;
+        height:125px;
+    }
+
+    h1{
+
+        font-size:1.8rem;
+
+        text-align:center;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Pick Your Special Gifts 🤎✨</h1>
+
+<!-- STARS -->
+
+<script>
+
+for(let i=0;i<100;i++){
+
+    let star=document.createElement("div");
+
+    star.classList.add("star");
+
+    star.style.top=Math.random()*100+"%";
+
+    star.style.left=Math.random()*100+"%";
+
+    star.style.animationDuration=
+    (Math.random()*3+2)+"s";
+
+    document.body.appendChild(star);
+}
+
+</script>
+
+<!-- DUST -->
+
+<script>
+
+for(let i=0;i<60;i++){
+
+    let dust=document.createElement("div");
+
+    dust.classList.add("dust");
+
+    dust.style.left=Math.random()*100+"%";
+
+    dust.style.animationDuration=
+    (Math.random()*10+10)+"s";
+
+    dust.style.opacity=Math.random();
+
+    document.body.appendChild(dust);
+}
+
+</script>
+
+<!-- GIFTS -->
+
+<div class="gift-boxes">
+
+    <div class="gift"
+    onclick="openGift('gift1.html')">
+
+        <img src="gift.jpg">
+
+    </div>
+
+    <div class="gift"
+    onclick="openGift('gift2.html')">
+
+        <img src="gift.jpg">
+
+    </div>
+
+    <div class="gift"
+    onclick="openGift('gift3.html')">
+
+        <img src="gift.jpg">
+
+    </div>
+
+    <div class="gift"
+    onclick="openGift('gift4.html')">
+
+        <img src="gift.jpg">
+
+    </div>
+
+    <div class="gift"
+    onclick="openGift('gift5.html')">
+
+        <img src="gift.jpg">
+
+    </div>
+
+    <div class="gift"
+    onclick="openGift('gift6.html')">
+
+        <img src="gift.jpg">
+
+    </div>
+
+</div>
+
+<script>
+
+function openGift(page){
+
+    window.location.href = page;
+}
+
+</script>
+<!-- HEART BUBBLES STYLE -->
+
+<style>
+
+.heart{
+
+    position:fixed;
+
+    bottom:-40px;
+
+    color:#d6a56f;
+
+    pointer-events:none;
+
+    z-index:999;
+
+    opacity:0;
+
+    animation:heartBubble linear forwards;
+
+    filter:
+    drop-shadow(0 0 10px rgba(255,220,170,0.4));
+}
+
+/* FLOATING EFFECT */
+
+@keyframes heartBubble{
+
+    0%{
+
+        transform:
+        translateY(0)
+        translateX(0)
+        scale(0.6);
+
+        opacity:0;
+    }
+
+    15%{
+        opacity:1;
+    }
+
+    50%{
+
+        transform:
+        translateY(-45vh)
+        translateX(20px)
+        scale(1);
+    }
+
+    100%{
+
+        transform:
+        translateY(-110vh)
+        translateX(-20px)
+        scale(1.4);
+
+        opacity:0;
+    }
+}
+
+</style>
+
+
+<!-- HEART BUBBLES SCRIPT -->
+
+<script>
+
+setInterval(()=>{
+
+    let heart =
+    document.createElement("div");
+
+    heart.classList.add("heart");
+
+    heart.innerHTML = "🤎";
+
+    /* RANDOM POSITION */
+
+    heart.style.left =
+    Math.random()*100 + "vw";
+
+    /* RANDOM SIZE */
+
+    heart.style.fontSize =
+    (Math.random()*25 + 15) + "px";
+
+    /* RANDOM SPEED */
+
+    heart.style.animationDuration =
+    (Math.random()*4 + 4) + "s";
+
+    document.body.appendChild(heart);
+
+    /* REMOVE */
+
+    setTimeout(()=>{
+
+        heart.remove();
+
+    },8000);
+
+},250);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Memories 🤎</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet">
+
+<style>
+
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    min-height:100vh;
+
+    overflow-x:hidden;
+
+    background:
+    radial-gradient(circle at center,
+    #3b2a1f 0%,
+    #1c120d 60%,
+    #0d0806 100%);
+
+    font-family:'Caveat',cursive;
+
+    position:relative;
+
+    padding:50px 20px;
+}
+
+/* VINTAGE GRAIN */
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    inset:0;
+
+    background:url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+
+    opacity:0.18;
+
+    pointer-events:none;
+}
+
+/* TITLE */
+h1{
+
+    text-align:center;
+
+    color:#f8e7c9;
+
+    font-size:3rem;
+
+    margin-bottom:70px;
+
+    font-family:'Special Elite',cursive;
+
+    text-shadow:
+    0 0 15px rgba(255,220,170,0.4);
+
+    letter-spacing:3px;
+}
+
+/* DUST */
+.dust{
+
+    position:absolute;
+
+    width:4px;
+    height:4px;
+
+    background:rgba(255,255,255,0.2);
+
+    border-radius:50%;
+
+    animation:floatDust linear infinite;
+}
+
+@keyframes floatDust{
+
+    from{
+        transform:translateY(100vh);
+    }
+
+    to{
+        transform:translateY(-100vh);
+    }
+}
+
+/* WALL */
+.wall{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(260px,1fr));
+
+    gap:60px;
+
+    width:100%;
+
+    max-width:1500px;
+
+    margin:auto;
+
+    justify-items:center;
+}
+
+/* POLAROID */
+.memory{
+
+    width:260px;
+
+    background:#f7f1e3;
+
+    padding:15px 15px 70px;
+
+    position:relative;
+
+    box-shadow:
+    0 12px 30px rgba(0,0,0,0.5);
+
+    transition:0.5s;
+
+    cursor:pointer;
+
+    filter:sepia(20%);
+}
+
+/* RANDOM ROTATIONS */
+.memory:nth-child(odd){
+    transform:rotate(-4deg);
+}
+
+.memory:nth-child(even){
+    transform:rotate(4deg);
+}
+
+.memory:nth-child(3n){
+    transform:rotate(-6deg);
+}
+
+.memory:nth-child(5n){
+    transform:rotate(6deg);
+}
+
+/* HOVER */
+.memory:hover{
+
+    transform:
+    scale(1.08)
+    rotate(0deg);
+
+    z-index:20;
+
+    box-shadow:
+    0 20px 50px rgba(0,0,0,0.6);
+}
+
+/* IMAGE */
+.memory img{
+
+    width:100%;
+
+    height:300px;
+
+    object-fit:cover;
+
+    filter:
+    sepia(35%)
+    contrast(95%)
+    brightness(90%);
+
+    transition:0.5s;
+}
+
+.memory:hover img{
+
+    filter:
+    sepia(10%)
+    brightness(100%);
+}
+
+/* PIN */
+.pin{
+
+    width:22px;
+    height:22px;
+
+    background:#d97706;
+
+    border-radius:50%;
+
+    position:absolute;
+
+    top:-10px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    box-shadow:
+    0 0 10px rgba(0,0,0,0.4);
+}
+
+/* NOTE */
+.note{
+
+    position:absolute;
+
+    bottom:18px;
+    left:0;
+
+    width:100%;
+
+    text-align:center;
+
+    font-size:1.5rem;
+
+    color:#5b4636;
+
+    padding:0 10px;
+}
+
+/* POPUP */
+.popup{
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+    rgba(0,0,0,0.88);
+
+    backdrop-filter:blur(8px);
+
+    display:none;
+
+    justify-content:center;
+    align-items:center;
+
+    z-index:100;
+}
+
+/* POPUP BOX */
+.popup-content{
+
+    width:85%;
+    max-width:500px;
+
+    background:#f5e6cc;
+
+    border-radius:20px;
+
+    padding:20px;
+
+    position:relative;
+
+    box-shadow:
+    0 0 40px rgba(0,0,0,0.6);
+
+    animation:zoomIn 0.5s ease;
+
+    text-align:center;
+}
+
+@keyframes zoomIn{
+
+    from{
+        transform:scale(0.7);
+        opacity:0;
+    }
+
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+/* POPUP IMAGE */
+.popup-content img{
+
+    width:100%;
+
+    max-height:420px;
+
+    object-fit:contain;
+
+    border-radius:12px;
+
+    margin-bottom:18px;
+
+    filter:
+    sepia(25%)
+    contrast(95%);
+}
+
+/* POPUP TEXT */
+.popup-text{
+
+    font-size:2rem;
+
+    color:#5b4636;
+
+    text-align:center;
+
+    line-height:1.5;
+}
+
+/* CLOSE */
+.close{
+
+    position:absolute;
+
+    top:12px;
+    right:18px;
+
+    font-size:2rem;
+
+    cursor:pointer;
+
+    color:#5b4636;
+}
+
+/* BACK BUTTON */
+.back-btn{
+
+    position:absolute;
+
+    left:18px;
+    top:15px;
+
+    background:#6b4b35;
+
+    color:#fff;
+
+    border:none;
+
+    padding:8px 18px;
+
+    border-radius:30px;
+
+    font-size:1rem;
+
+    cursor:pointer;
+
+    font-family:'Special Elite',cursive;
+
+    transition:0.3s;
+}
+
+.back-btn:hover{
+
+    background:#8a6248;
+
+    transform:scale(1.05);
+}
+
+/* MOBILE */
+@media(max-width:600px){
+
+    .memory{
+        width:220px;
+    }
+
+    .memory img{
+        height:250px;
+    }
+
+    h1{
+        font-size:2rem;
+    }
+
+    .popup-text{
+        font-size:1.4rem;
+    }
+
+    .popup-content{
+        width:92%;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Memories 🤎✨</h1>
+
+<!-- DUST -->
+<script>
+
+for(let i=0;i<70;i++){
+
+    let dust=document.createElement("div");
+
+    dust.classList.add("dust");
+
+    dust.style.left=Math.random()*100+"%";
+
+    dust.style.animationDuration=
+    (Math.random()*10+10)+"s";
+
+    dust.style.opacity=Math.random();
+
+    document.body.appendChild(dust);
+}
+
+</script>
+
+<!-- WALL -->
+<div class="wall">
+
+<div class="memory" onclick="openMemory('sasi.jpeg','Indha photo final panna evlo photos ha waste pannom 😂 🤎')">
+<div class="pin"></div>
+<img src="sasi.jpeg">
+<div class="note">frozen by deepa ✨</div>
+</div>
+
+<div class="memory" onclick="openMemory('sasi2.jpeg','Prompt vachu nee matum edit panni kitta🥲')">
+<div class="pin"></div>
+<img src="sasi2.jpeg">
+<div class="note">cutieeee...... 📸</div>
+</div>
+
+<div class="memory" onclick="openMemory('sasi3.jpeg','pose ku lam onnum korachan illa😂')">
+<div class="pin"></div>
+<img src="sasi3.jpeg">
+<div class="note">cold charm 🤎</div>
+</div>
+
+<div class="memory" onclick="openMemory('sasi4.jpeg','But nalla than irruku pose!!✨')">
+<div class="pin"></div>
+<img src="sasi4.jpeg">
+<div class="note">with white like angel 😇</div>
+</div>
+
+<div class="memory" onclick="openMemory('sasi5.jpeg','✌🏻')">
+<div class="pin"></div>
+<img src="sasi5.jpeg">
+<div class="note">look like vanillllaaaaa 🤍</div>
+</div>
+
+<div class="memory" onclick="openMemory('sasi6.jpeg','🤍🤍🤍')">
+<div class="pin"></div>
+<img src="sasi6.jpeg">
+<div class="note">but i love chocolate 😉</div>
+</div>
+
+<div class="memory" onclick="openMemory('sasi7.jpeg','Alaga irrukinga madam 😚🧿')">
+<div class="pin"></div>
+<img src="sasi7.jpeg">
+<div class="note">finalllyyy... 📖</div>
+</div>
+
+<div class="memory" onclick="openMemory('sasi8.jpeg','Photo black and white ha irrundhalum paaka colourful ha irruku🩵 ')">
+<div class="pin"></div>
+<img src="sasi8.jpeg">
+<div class="note">!!!!!!!!!!! ✨</div>
+</div>
+
+<div class="memory" onclick="openMemory('sasi9.jpeg','side la apdi yaru irrukanga nu terla 😂')">
+<div class="pin"></div>
+<img src="sasi9.jpeg">
+<div class="note">timeless 📸</div>
+</div>
+
+<div class="memory" onclick="openMemory('sasi10.jpeg','School admission ku pose kudukura mathiri irruku😂')">
+<div class="pin"></div>
+<img src="sasi10.jpeg">
+<div class="note">sun kissed 🙂‍↔️</div>
+</div>
+
+<div class="memory" onclick="openMemory('sasi11.jpeg','Indha photo va maraka mudiyuma ')">
+<div class="pin"></div>
+<img src="sasi11.jpeg">
+<div class="note">magic days 🌙</div>
+</div>
+
+<div class="memory" onclick="openMemory('sasi12.jpeg','indha photoshoot apo namba anaiku pongal celebration nu marandhutom la😂 ')">
+<div class="pin"></div>
+<img src="sasi12.jpeg">
+<div class="note">special memories 📖</div>
+</div>
+
+<div class="memory" onclick="openMemory('sasi13.jpeg','indha pic lam edukum pothu namba yara pathiyum yosikala 😌')">
+<div class="pin"></div>
+<img src="sasi13.jpeg">
+<div class="note">simple joys ✨</div>
+</div>
+
+<div class="memory" onclick="openMemory('sasi14.jpeg','This edit 🫠')">
+<div class="pin"></div>
+<img src="sasi14.jpeg">
+<div class="note">bright memories 📸</div>
+</div>
+
+<div class="memory" onclick="openMemory('sasi15.jpeg','Sokka thangamadi 🩵🩵')">
+<div class="pin"></div>
+<img src="sasi15.jpeg">
+<div class="note">warm hearts 🕰</div>
+</div>
+
+<div class="memory" onclick="openMemory('sasi16.jpeg','our best pic 😚')">
+<div class="pin"></div>
+<img src="sasi16.jpeg">
+<div class="note">forever vibes 🌙</div>
+</div>
+
+<div class="memory" onclick="openMemory('sasi17.jpeg','Actually indha saree namaku nalla irruku la')">
+<div class="pin"></div>
+<img src="sasi17.jpeg">
+<div class="note">favorite chapter 🤎</div>
+</div>
+
+<div class="memory" onclick="openMemory('sasi18.jpeg','🧿🧿🧿🧿🧿🧿🧿')">
+<div class="pin"></div>
+<img src="sasi18.jpeg">
+<div class="note">golden days 📸</div>
+</div>
+
+<div class="memory" onclick="openMemory('sasi19.jpeg','indha butterfly namaku romba special🫠')">
+<div class="pin"></div>
+<img src="sasi19.jpeg">
+<div class="note">captured joy 🤍</div>
+</div>
+
+<div class="memory" onclick="openMemory('sasi20.jpeg','namba first time rendu per matum edukanum nu mudivu panni edutha pic nu nenaikuarn')">
+<div class="pin"></div>
+<img src="sasi20.jpeg">
+<div class="note">unforgettable 💫</div>
+</div>
+
+<div class="memory" onclick="openMemory('sasi21.jpeg','namba romba happy ha irrundha last days ithu than hope adikadi indha mathiri neraya time spend pannalam inshallah🩵')">
+<div class="pin"></div>
+<img src="sasi21.jpeg">
+<div class="note">heart memories 🌙</div>
+</div>
+
+<div class="memory" onclick="openMemory('sasi22.jpeg','Thank you for being in my story 🤍')">
+<div class="pin"></div>
+<img src="sasi22.jpeg">
+<div class="note">our memories 📖</div>
+</div>
+
+</div>
+<!-- POPUP -->
+<div class="popup" id="popup">
+
+<div class="popup-content">
+
+<!-- <button class="back-btn" onclick="closePopup()">
+← Back
+</button>
+
+<span class="close" onclick="closePopup()">
+×
+</span> -->
+
+<img id="popupImg">
+
+<div class="popup-text" id="popupText"></div>
+
+</div>
+
+</div>
+
+<script>
+
+function openMemory(image,text){
+
+    document.getElementById("popup").style.display="flex";
+
+    document.getElementById("popupImg").src=image;
+
+    document.getElementById("popupText").innerHTML=text;
+}
+
+function closePopup(){
+
+    document.getElementById("popup").style.display="none";
+}
+
+/* CLOSE WHEN CLICK OUTSIDE */
+window.onclick=function(event){
+
+    const popup=document.getElementById("popup");
+
+    if(event.target==popup){
+
+        popup.style.display="none";
+    }
+}
+
+</script>
+
+</body>
+</html>

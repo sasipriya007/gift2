@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Vintage Letter 🤎</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#0f0a07;
+}
+
+/* PAPER */
+.paper{
+    width:100vw;
+    height:100vh;
+    background:url("invi.webp");
+    background-size:cover;
+    background-position:center;
+    padding:70px 140px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+/* TITLE */
+.title{
+    font-family:'Parisienne',cursive;
+    font-size:3.8rem;
+    color:#4a2f22;
+    text-align:center;
+    margin-bottom:20px;
+}
+
+/* TEXT */
+.text{
+    font-family:'Parisienne',cursive;
+    font-size:1.65rem;
+    color:#3f2a1f;
+    line-height:1.25;
+    white-space:pre-line;
+    max-width:1100px;
+    margin:0 auto;
+    text-align:left;
+}
+
+/* CURSOR */
+.cursor{
+    display:inline-block;
+    width:3px;
+    height:24px;
+    background:#3f2a1f;
+    margin-left:4px;
+    animation:blink 0.7s infinite;
+}
+
+@keyframes blink{
+    50%{
+        opacity:0;
+    }
+}
+
+/* SIGN AREA */
+.sign{
+    margin-top:40px;
+    text-align:right;
+    max-width:1100px;
+    margin-left:auto;
+    margin-right:auto;
+    font-family:'Parisienne',cursive;
+    color:#5a3828;
+    font-size:2.4rem;
+}
+
+/* hidden elements */
+.hidden{
+    opacity:0;
+}
+
+/* fade animation */
+.show{
+    opacity:1;
+    transition:all 0.8s ease;
+}
+
+/* name style */
+.name{
+    font-size:2.1rem;
+    margin-top:8px;
+    opacity:0;
+    transform:translateY(10px);
+    transition:all 1s ease;
+}
+
+.name.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND MUSIC -->
+<audio id="bgMusic" autoplay loop>
+    <source src="letter bgm.mp3" type="audio/mp3">
+</audio>
+
+<div class="paper">
+
+    <div class="title">Hey My Dear...</div>
+
+    <div class="text" id="typing"></div>
+
+    <div class="sign">
+        <div id="signText" class="hidden"></div>
+        <div id="nameText" class="name">Jaan💙</div>
+    </div>
+
+</div>
+
+<script>
+
+const message = `Happyyyyyyyy birthday my gurl. I really don't know how to wish
+but therinja alavuku pandran. sandhoshama iru 😇. 
+“A wish for you on your birthday, whatever you ask may you receive, whatever you seek may you find, 
+whatever you wish may it be fulfilled on your birthday and always. Happy birthday!” 
+Namba life la namaku pudikatha neraya incident nadakalam but end up ellam happy ha than mudiyum, mudinjathu. soo 
+ne vera clg ponalum nalla friends lam kedaipanga but pathu iru unwanted serupadi la poi vangatha😂
+Enjoy your day gurl. love you..!!!!'`;
+
+const signMessage = "Yours Always ✨";
+
+let i = 0;
+let j = 0;
+
+const typingBox = document.getElementById("typing");
+const signBox = document.getElementById("signText");
+const nameBox = document.getElementById("nameText");
+
+/* MUSIC */
+const music = document.getElementById("bgMusic");
+
+/* FORCE AUTOPLAY */
+window.addEventListener("load", () => {
+
+    music.volume = 0.6;
+
+    const playPromise = music.play();
+
+    if(playPromise !== undefined){
+
+        playPromise.catch(() => {
+
+            document.addEventListener("click", () => {
+                music.play();
+            }, { once:true });
+
+        });
+
+    }
+
+});
+
+/* TYPE MAIN MESSAGE */
+function typeWriter(){
+
+    if(i < message.length){
+
+        typingBox.innerHTML =
+        message.substring(0,i) +
+        '<span class="cursor"></span>';
+
+        i++;
+
+        setTimeout(typeWriter,140);
+
+    }
+
+    else{
+
+        typingBox.innerHTML = message;
+
+        typeSign();
+
+    }
+
+}
+
+/* TYPE SIGNATURE */
+function typeSign(){
+
+    signBox.classList.remove("hidden");
+
+    if(j < signMessage.length){
+
+        signBox.innerHTML =
+        signMessage.substring(0,j) +
+        '<span class="cursor"></span>';
+
+        j++;
+
+        setTimeout(typeSign,90);
+
+    }
+
+    else{
+
+        signBox.innerHTML = signMessage;
+
+        nameBox.classList.add("show");
+
+    }
+
+}
+
+typeWriter();
+
+</script>
+
+</body>
+</html>

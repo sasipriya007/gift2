@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Starry Sky Memories 🤎✨</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Special+Elite&display=swap" rel="stylesheet">
+
+<style>
+
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    height:100vh;
+    overflow:hidden;
+    background: radial-gradient(circle at bottom,
+        #0b1020 0%,
+        #05060a 60%,
+        #000000 100%);
+    font-family:'Parisienne',cursive;
+}
+
+/* BACK BUTTON */
+.back-btn{
+    position:fixed;
+    top:20px;
+    left:20px;
+    padding:10px 18px;
+    background:rgba(255,255,255,0.1);
+    color:#fff;
+    border:1px solid rgba(255,255,255,0.3);
+    border-radius:10px;
+    cursor:pointer;
+    z-index:100;
+    backdrop-filter:blur(8px);
+    transition:0.3s;
+}
+
+.back-btn:hover{
+    transform:scale(1.05);
+    background:rgba(255,255,255,0.2);
+}
+
+/* TITLE */
+h1{
+    text-align:center;
+    color:#ffffff;
+    font-size:3rem;
+    margin-top:40px;
+    text-shadow:0 0 20px rgba(255,255,255,0.5);
+}
+
+/* STAR FIELD */
+.star{
+    position:absolute;
+    width:6px;
+    height:6px;
+    background:white;
+    border-radius:50%;
+    box-shadow:0 0 10px white, 0 0 20px rgba(255,255,255,0.5);
+    cursor:pointer;
+    animation:twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+    from{opacity:0.3; transform:scale(0.8);}
+    to{opacity:1; transform:scale(1.2);}
+}
+
+/* POPUP */
+.popup{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.85);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:200;
+    backdrop-filter:blur(8px);
+}
+
+/* POPUP BOX */
+.popup-content{
+    width:90%;
+    max-width:600px;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.2);
+    border-radius:20px;
+    padding:30px;
+    text-align:center;
+    color:white;
+    animation:zoom 0.5s ease;
+}
+
+@keyframes zoom{
+    from{transform:scale(0.7); opacity:0;}
+    to{transform:scale(1); opacity:1;}
+}
+
+/* TEXT */
+.popup-text{
+    font-size:2rem;
+    line-height:1.6;
+}
+
+/* CLOSE */
+.close{
+    position:absolute;
+    top:15px;
+    right:20px;
+    font-size:2rem;
+    cursor:pointer;
+    color:white;
+}
+
+</style>
+</head>
+
+<body>
+
+
+<h1>Click the stars to see your special message✨🤎</h1>
+
+<!-- STARS -->
+<script>
+
+const memories = [
+"Unmaya solla pona na athigama sirichathu unkuda matum than. Romba safe ha comfort ha unkuda feel panuvan gurl... Athunala than nee epayum enaku romba special 😚",
+"Na yarukagavum efforts poda matan apdi potta avanga enaku romba important person ha irrupanga soooooo...... You play huge role in my life!!!! ",
+"Happy birthday my gurl inemel nee ella birthday vum romba special ha celebrate pannanum ",
+"Love you my gurl❤️‍🩹 And i miss you soooooooooooooooooooo much ",
+"Na eppayum ellathayum marandhutea irrupan but our memories lam ethum na marakala ellam neyabagam irrukum. Enna analum maraka kudathunu sila vishayam yosipan athula neyum onnu 🧿🧿",
+"Hey enaku oru asai dii un daughter hum en daughter hum nambala mathiri best friends ha irrukanum. kandipa irrupanga"
+];
+
+for(let i=0;i<60;i++){
+
+    let star = document.createElement("div");
+    star.classList.add("star");
+
+    star.style.top = Math.random()*100 + "vh";
+    star.style.left = Math.random()*100 + "vw";
+    star.style.animationDuration = (1 + Math.random()*3) + "s";
+
+    let index = Math.floor(Math.random()*memories.length);
+    star.setAttribute("data-text", memories[index]);
+
+    star.onclick = function(){
+        openStar(this.getAttribute("data-text"));
+    }
+
+    document.body.appendChild(star);
+}
+
+</script>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+
+<div class="popup-content">
+
+<span class="close" onclick="closePopup()">×</span>
+
+<div class="popup-text" id="popupText"></div>
+
+</div>
+
+</div>
+
+<script>
+
+/* OPEN STAR */
+function openStar(text){
+    document.getElementById("popup").style.display="flex";
+    document.getElementById("popupText").innerHTML=text;
+}
+
+/* CLOSE */
+function closePopup(){
+    document.getElementById("popup").style.display="none";
+}
+
+/* BACK */
+function goBack(){
+    document.getElementById("popup").style.display="none";
+    window.scrollTo({top:0, behavior:"smooth"});
+}
+
+</script>
+
+</body>
+</html>

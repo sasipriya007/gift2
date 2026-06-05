@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Secret Birthday 🤎</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* BODY */
+
+body{
+
+    height:100vh;
+
+    overflow:hidden;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+    radial-gradient(circle at top,
+    #3b2a1f 0%,
+    #1c120d 50%,
+    #0d0806 100%);
+
+    position:relative;
+
+    font-family:'Caveat',cursive;
+}
+
+/* VINTAGE GRAIN */
+
+body::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+    url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+
+    opacity:0.15;
+
+    pointer-events:none;
+}
+
+/* STARS */
+
+.star{
+
+    position:absolute;
+
+    width:3px;
+    height:3px;
+
+    background:#fff7ed;
+
+    border-radius:50%;
+
+    animation:twinkle 3s infinite ease-in-out;
+}
+
+@keyframes twinkle{
+
+    0%,100%{
+
+        opacity:0.2;
+
+        transform:scale(1);
+    }
+
+    50%{
+
+        opacity:1;
+
+        transform:scale(2);
+    }
+}
+
+/* GLOW */
+
+.glow{
+
+    position:absolute;
+
+    width:380px;
+    height:380px;
+
+    background:#d97706;
+
+    border-radius:50%;
+
+    filter:blur(140px);
+
+    opacity:0.18;
+}
+
+/* MAIN CONTAINER */
+
+.container{
+
+    width:300px;
+
+    background:
+    rgba(255,248,235,0.08);
+
+    border:
+    1px solid rgba(255,255,255,0.1);
+
+    backdrop-filter:blur(18px);
+
+    border-radius:24px;
+
+    padding:32px 24px;
+
+    text-align:center;
+
+    box-shadow:
+    0 0 35px rgba(0,0,0,0.4);
+
+    position:relative;
+
+    z-index:5;
+
+    animation:fadeIn 1.5s ease;
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(30px);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+    }
+}
+
+/* HEADING */
+
+h1{
+
+    color:#f8e7c9;
+
+    font-size:1.8rem;
+
+    font-family:'Special Elite',cursive;
+
+    letter-spacing:2px;
+
+    text-shadow:
+    0 0 10px rgba(255,220,170,0.3);
+}
+
+/* SUBTEXT */
+
+p{
+
+    color:#e7d7c2;
+
+    margin-top:14px;
+
+    margin-bottom:24px;
+
+    font-size:1.2rem;
+
+    line-height:1.5;
+}
+
+/* PASSWORD BOX */
+
+.password-box{
+
+    width:100%;
+
+    height:58px;
+
+    border-radius:16px;
+
+    background:#ffffff10;
+
+    margin-bottom:24px;
+
+    color:#f8e7c9;
+
+    font-size:1.7rem;
+
+    letter-spacing:8px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    border:
+    1px solid rgba(255,255,255,0.08);
+
+    box-shadow:
+    inset 0 0 10px rgba(255,255,255,0.04);
+}
+
+/* KEYPAD */
+
+.keypad{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:12px;
+}
+
+/* BUTTONS */
+
+.key{
+
+    height:58px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:
+    linear-gradient(
+    to bottom,
+    #c08457,
+    #8b5e3c);
+
+    color:#fff7ed;
+
+    font-size:1.1rem;
+
+    font-family:'Special Elite',cursive;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+    box-shadow:
+    0 0 15px rgba(0,0,0,0.35);
+}
+
+.key:hover{
+
+    transform:scale(1.05);
+
+    box-shadow:
+    0 0 22px rgba(255,220,170,0.25);
+}
+
+/* UNLOCK EFFECT */
+
+.unlock{
+
+    animation:unlockGlow 1s ease;
+}
+
+@keyframes unlockGlow{
+
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+
+        transform:scale(1.04);
+
+        box-shadow:
+        0 0 70px rgba(255,220,170,0.4);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+}
+
+/* ERROR */
+
+.error{
+
+    animation:shake 0.5s;
+}
+
+@keyframes shake{
+
+    0%{
+        transform:translateX(0);
+    }
+
+    25%{
+        transform:translateX(-8px);
+    }
+
+    50%{
+        transform:translateX(8px);
+    }
+
+    75%{
+        transform:translateX(-8px);
+    }
+
+    100%{
+        transform:translateX(0);
+    }
+}
+
+/* HEARTS */
+
+.heart{
+
+    position:fixed;
+
+    bottom:-40px;
+
+    color:#d6a56f;
+
+    pointer-events:none;
+
+    z-index:999;
+
+    opacity:0;
+
+    animation:heartBubble linear forwards;
+
+    filter:
+    drop-shadow(0 0 10px rgba(255,220,170,0.4));
+}
+
+@keyframes heartBubble{
+
+    0%{
+
+        transform:
+        translateY(0)
+        translateX(0)
+        scale(0.6);
+
+        opacity:0;
+    }
+
+    15%{
+        opacity:1;
+    }
+
+    50%{
+
+        transform:
+        translateY(-45vh)
+        translateX(20px)
+        scale(1);
+    }
+
+    100%{
+
+        transform:
+        translateY(-110vh)
+        translateX(-20px)
+        scale(1.4);
+
+        opacity:0;
+    }
+}
+
+/* MOBILE */
+
+@media(max-width:500px){
+
+    .container{
+
+        width:88%;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- GLOW -->
+
+<div class="glow"></div>
+
+<!-- STARS -->
+
+<script>
+
+for(let i=0;i<100;i++){
+
+    let star=document.createElement("div");
+
+    star.classList.add("star");
+
+    star.style.top=
+    Math.random()*100+"%";
+
+    star.style.left=
+    Math.random()*100+"%";
+
+    star.style.animationDuration=
+    (Math.random()*3+2)+"s";
+
+    document.body.appendChild(star);
+}
+
+</script>
+
+<!-- MAIN -->
+
+<div class="container" id="container">
+
+    <h1>
+        Special gift 🤎
+    </h1>
+
+    <p>
+        Enter the secret code
+        to unlock your Birthday surprise ✨
+    </p>
+
+    <!-- PASSWORD -->
+
+    <div id="password"
+    class="password-box"></div>
+
+    <!-- KEYPAD -->
+
+    <div class="keypad">
+
+        <button class="key"
+        onclick="addNumber('1')">1</button>
+
+        <button class="key"
+        onclick="addNumber('2')">2</button>
+
+        <button class="key"
+        onclick="addNumber('3')">3</button>
+
+        <button class="key"
+        onclick="addNumber('4')">4</button>
+
+        <button class="key"
+        onclick="addNumber('5')">5</button>
+
+        <button class="key"
+        onclick="addNumber('6')">6</button>
+
+        <button class="key"
+        onclick="addNumber('7')">7</button>
+
+        <button class="key"
+        onclick="addNumber('8')">8</button>
+
+        <button class="key"
+        onclick="addNumber('9')">9</button>
+
+        <button class="key"
+        onclick="clearPassword()">✖</button>
+
+        <button class="key"
+        onclick="addNumber('0')">0</button>
+
+        <button class="key"
+        onclick="checkPassword()">🤎</button>
+
+    </div>
+
+</div>
+
+<!-- PASSWORD SCRIPT -->
+
+<script>
+
+let enteredPassword = "";
+
+/* ADD */
+
+function addNumber(num){
+
+    if(enteredPassword.length < 4){
+
+        enteredPassword += num;
+
+        document.getElementById("password")
+        .innerHTML =
+        "🤎".repeat(enteredPassword.length);
+    }
+}
+
+/* CLEAR */
+
+function clearPassword(){
+
+    enteredPassword = "";
+
+    document.getElementById("password")
+    .innerHTML = "";
+}
+
+/* CHECK */
+
+function checkPassword(){
+
+    const container =
+    document.getElementById("container");
+
+    if(enteredPassword === "1234"){
+
+        container.classList.add("unlock");
+
+        setTimeout(()=>{
+
+            window.location.href =
+            "wish.html";
+
+        },1200);
+    }
+
+    else{
+
+        container.classList.add("error");
+
+        setTimeout(()=>{
+
+            container.classList.remove("error");
+
+        },500);
+
+        enteredPassword = "";
+
+        document.getElementById("password")
+        .innerHTML = "";
+
+        alert("Wrong password 😭🤎");
+    }
+}
+
+</script>
+
+<!-- HEARTS SCRIPT -->
+
+<script>
+
+setInterval(()=>{
+
+    let heart =
+    document.createElement("div");
+
+    heart.classList.add("heart");
+
+    heart.innerHTML = "🤎";
+
+    heart.style.left =
+    Math.random()*100 + "vw";
+
+    heart.style.fontSize =
+    (Math.random()*20 + 12) + "px";
+
+    heart.style.animationDuration =
+    (Math.random()*4 + 4) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+
+        heart.remove();
+
+    },8000);
+
+},250);
+
+</script>
+
+</body>
+</html>

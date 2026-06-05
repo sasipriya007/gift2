@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Accept My Gift 🤎</title>
+
+<!-- VINTAGE FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* BODY */
+
+body{
+
+    height:100vh;
+    overflow:hidden;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+    radial-gradient(circle at top,
+    #3b2a1f 0%,
+    #1c120d 50%,
+    #0d0806 100%);
+
+    position:relative;
+
+    font-family:'Caveat',cursive;
+}
+
+/* VINTAGE GRAIN */
+
+body::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+
+    opacity:0.15;
+
+    pointer-events:none;
+}
+
+/* STARS */
+
+.star{
+
+    position:absolute;
+
+    width:3px;
+    height:3px;
+
+    background:#fff7ed;
+
+    border-radius:50%;
+
+    animation:twinkle 3s infinite ease-in-out;
+}
+
+@keyframes twinkle{
+
+    0%,100%{
+        opacity:0.2;
+        transform:scale(1);
+    }
+
+    50%{
+        opacity:1;
+        transform:scale(2);
+    }
+}
+
+/* FLOATING DUST */
+
+.dust{
+
+    position:absolute;
+
+    width:4px;
+    height:4px;
+
+    background:rgba(255,255,255,0.15);
+
+    border-radius:50%;
+
+    animation:floatDust linear infinite;
+}
+
+@keyframes floatDust{
+
+    from{
+        transform:translateY(100vh);
+    }
+
+    to{
+        transform:translateY(-100vh);
+    }
+}
+
+/* MAIN CARD */
+
+.container{
+
+    width:390px;
+
+    background:rgba(255,248,235,0.08);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(18px);
+
+    border-radius:35px;
+
+    padding:45px 35px;
+
+    text-align:center;
+
+    position:relative;
+
+    z-index:10;
+
+    box-shadow:
+    0 0 40px rgba(0,0,0,0.45);
+
+    animation:fadeIn 1.5s ease;
+}
+
+@keyframes fadeIn{
+
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* IMAGE */
+
+.doll{
+
+    width:240px;
+
+    margin-bottom:25px;
+
+    animation:float 3s infinite ease-in-out;
+
+    filter:
+    drop-shadow(0 0 25px rgba(255,220,170,0.2));
+}
+
+@keyframes float{
+
+    0%{
+        transform:translateY(0px);
+    }
+
+    50%{
+        transform:translateY(-10px);
+    }
+
+    100%{
+        transform:translateY(0px);
+    }
+}
+
+/* TITLE */
+
+h1{
+
+    color:#f8e7c9;
+
+    font-size:2.1rem;
+
+    margin-bottom:15px;
+
+    font-family:'Special Elite',cursive;
+
+    text-shadow:
+    0 0 10px rgba(255,220,170,0.2);
+
+    letter-spacing:2px;
+}
+
+/* TEXT */
+
+p{
+
+    color:#e7d7c2;
+
+    font-size:1.5rem;
+
+    margin-bottom:40px;
+
+    line-height:1.5;
+}
+
+/* BUTTON AREA */
+
+.buttons{
+
+    position:relative;
+
+    width:100%;
+    height:110px;
+}
+
+/* COMMON BUTTON */
+
+button{
+
+    border:none;
+
+    padding:16px 38px;
+
+    border-radius:50px;
+
+    color:#fff7ed;
+
+    font-size:1.1rem;
+
+    font-family:'Special Elite',cursive;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+    position:absolute;
+}
+
+/* YES BUTTON */
+
+.yes-btn{
+
+    left:10px;
+
+    background:
+    linear-gradient(
+    to bottom,
+    #c08457,
+    #8b5e3c);
+
+    box-shadow:
+    0 0 20px rgba(0,0,0,0.4);
+}
+
+.yes-btn:hover{
+
+    transform:scale(1.08);
+}
+
+/* NO BUTTON */
+
+.no-btn{
+
+    right:10px;
+
+    background:
+    linear-gradient(
+    to bottom,
+    #6b4f3b,
+    #3b2a1f);
+
+    box-shadow:
+    0 0 20px rgba(0,0,0,0.4);
+}
+
+/* MOBILE */
+
+@media(max-width:500px){
+
+    .container{
+        width:90%;
+    }
+
+    .doll{
+        width:190px;
+    }
+
+    h1{
+        font-size:1.7rem;
+    }
+
+    p{
+        font-size:1.2rem;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- STARS -->
+
+<script>
+
+for(let i=0;i<100;i++){
+
+    let star=document.createElement("div");
+
+    star.classList.add("star");
+
+    star.style.top=Math.random()*100+"%";
+
+    star.style.left=Math.random()*100+"%";
+
+    star.style.animationDuration=
+    (Math.random()*3+2)+"s";
+
+    document.body.appendChild(star);
+}
+
+</script>
+
+<!-- DUST -->
+
+<script>
+
+for(let i=0;i<60;i++){
+
+    let dust=document.createElement("div");
+
+    dust.classList.add("dust");
+
+    dust.style.left=Math.random()*100+"%";
+
+    dust.style.animationDuration=
+    (Math.random()*10+10)+"s";
+
+    dust.style.opacity=Math.random();
+
+    document.body.appendChild(dust);
+}
+
+</script>
+
+<!-- MAIN CONTENT -->
+
+<div class="container">
+
+    <!-- IMAGE
+
+    <img src="doll.png"
+    class="doll"> -->
+
+    <!-- TITLE -->
+
+    <h1>
+
+        Can You Accept My Gift? 🤎
+
+    </h1>
+
+    <!-- SUBTEXT -->
+
+    <p>
+
+        I made something special only for you ✨
+
+    </p>
+
+    <!-- BUTTONS -->
+
+    <div class="buttons">
+
+        <!-- YES -->
+
+        <button class="yes-btn"
+        onclick="acceptGift()">
+
+            YES 🤎
+
+        </button>
+
+        <!-- NO -->
+
+        <button class="no-btn"
+        id="noBtn">
+
+            NO 🙈
+
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+/* YES BUTTON */
+
+function acceptGift(){
+
+    alert("Yayyyyy 😭🤎");
+
+    window.location.href="boxes.html";
+}
+
+/* RUNAWAY BUTTON */
+
+const noBtn =
+document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover",()=>{
+
+    const x =
+    Math.random()*230;
+
+    const y =
+    Math.random()*70;
+
+    noBtn.style.left = x+"px";
+
+    noBtn.style.top = y+"px";
+});
+
+</script>
+<!-- HEART BUBBLES STYLE -->
+
+<style>
+
+.heart{
+
+    position:fixed;
+
+    bottom:-40px;
+
+    color:#d6a56f;
+
+    pointer-events:none;
+
+    z-index:999;
+
+    opacity:0;
+
+    animation:heartBubble linear forwards;
+
+    filter:
+    drop-shadow(0 0 10px rgba(255,220,170,0.4));
+}
+
+/* FLOATING EFFECT */
+
+@keyframes heartBubble{
+
+    0%{
+
+        transform:
+        translateY(0)
+        translateX(0)
+        scale(0.6);
+
+        opacity:0;
+    }
+
+    15%{
+        opacity:1;
+    }
+
+    50%{
+
+        transform:
+        translateY(-45vh)
+        translateX(20px)
+        scale(1);
+    }
+
+    100%{
+
+        transform:
+        translateY(-110vh)
+        translateX(-20px)
+        scale(1.4);
+
+        opacity:0;
+    }
+}
+
+</style>
+
+
+<!-- HEART BUBBLES SCRIPT -->
+
+<script>
+
+setInterval(()=>{
+
+    let heart =
+    document.createElement("div");
+
+    heart.classList.add("heart");
+
+    heart.innerHTML = "🤎";
+
+    /* RANDOM POSITION */
+
+    heart.style.left =
+    Math.random()*100 + "vw";
+
+    /* RANDOM SIZE */
+
+    heart.style.fontSize =
+    (Math.random()*25 + 15) + "px";
+
+    /* RANDOM SPEED */
+
+    heart.style.animationDuration =
+    (Math.random()*4 + 4) + "s";
+
+    document.body.appendChild(heart);
+
+    /* REMOVE */
+
+    setTimeout(()=>{
+
+        heart.remove();
+
+    },8000);
+
+},250);
+
+</script>
+
+</body>
+</html>

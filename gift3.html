@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cinematic Memory Gift 🤎</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+/* RESET */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    overflow:hidden;
+    background:#000;
+    font-family:'Cormorant Garamond',serif;
+}
+
+/* ---------------- INTRO ---------------- */
+
+.intro{
+    position:fixed;
+    inset:0;
+
+    background:
+    radial-gradient(circle at center,
+    #1b140f 0%,
+    #090706 100%);
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    z-index:10;
+
+    transition:1.5s;
+}
+
+.intro.hide{
+    opacity:0;
+    pointer-events:none;
+}
+
+/* FILM GRAIN */
+
+.intro::before{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:
+    url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+
+    opacity:0.2;
+
+    animation:grain 0.3s infinite;
+}
+
+@keyframes grain{
+
+    0%{transform:translate(0,0);}
+    25%{transform:translate(2px,-2px);}
+    50%{transform:translate(-2px,2px);}
+    75%{transform:translate(1px,-1px);}
+    100%{transform:translate(0,0);}
+}
+
+/* INTRO TEXT */
+
+.intro-text{
+
+    color:#f5e3c7;
+
+    font-size:4rem;
+
+    text-align:center;
+
+    max-width:900px;
+
+    line-height:1.2;
+
+    opacity:0;
+
+    animation:fadeText 2s forwards;
+
+    padding:0 20px;
+}
+
+@keyframes fadeText{
+
+    to{
+        opacity:1;
+    }
+}
+
+/* BUTTON */
+
+.start-btn{
+
+    margin-top:50px;
+
+    padding:14px 42px;
+
+    border:none;
+    outline:none;
+
+    background:#f0d7b5;
+
+    color:#2a1b15;
+
+    font-size:1.1rem;
+
+    letter-spacing:2px;
+
+    cursor:pointer;
+
+    border-radius:40px;
+
+    transition:0.4s;
+
+    opacity:0;
+
+    animation:showBtn 2s forwards;
+
+    animation-delay:1.5s;
+}
+
+.start-btn:hover{
+    transform:scale(1.05);
+}
+
+@keyframes showBtn{
+
+    to{
+        opacity:1;
+    }
+}
+
+/* ---------------- MAIN ---------------- */
+
+.main{
+
+    position:fixed;
+    inset:0;
+
+    display:none;
+
+    overflow:hidden;
+}
+
+/* PROJECTOR LIGHT */
+
+.projector-light{
+
+    position:absolute;
+
+    left:-20%;
+    top:50%;
+
+    width:80%;
+    height:400px;
+
+    background:
+    linear-gradient(to right,
+    rgba(255,245,220,0.25),
+    transparent);
+
+    transform:
+    translateY(-50%)
+    rotate(-5deg);
+
+    filter:blur(10px);
+
+    z-index:0;
+}
+
+/* DUST */
+
+.dust{
+
+    position:absolute;
+
+    width:3px;
+    height:3px;
+
+    background:#fff;
+
+    border-radius:50%;
+
+    opacity:0.3;
+
+    animation:dustMove linear infinite;
+}
+
+@keyframes dustMove{
+
+    from{
+        transform:translateY(100vh);
+    }
+
+    to{
+        transform:translateY(-120vh);
+    }
+}
+
+/* FILM STRIP */
+
+.film-strip{
+
+    position:absolute;
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:100%;
+    height:420px;
+
+    display:flex;
+    align-items:center;
+
+    gap:50px;
+
+    padding:0 100px;
+
+    animation:slideFilm 30s linear infinite;
+}
+
+@keyframes slideFilm{
+
+    from{
+        transform:translate(-10%,-50%);
+    }
+
+    to{
+        transform:translate(-65%,-50%);
+    }
+}
+
+/* FILM FRAME */
+
+.frame{
+
+    min-width:300px;
+    height:380px;
+
+    background:#111;
+
+    border:12px solid #000;
+
+    position:relative;
+
+    overflow:hidden;
+
+    box-shadow:
+    0 0 25px rgba(0,0,0,0.7);
+}
+
+/* FILM HOLES */
+
+.frame::before,
+.frame::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:12px;
+    height:100%;
+
+    background:
+    repeating-linear-gradient(
+    to bottom,
+    #000 0 14px,
+    transparent 14px 28px
+    );
+}
+
+.frame::before{
+    left:-12px;
+}
+
+.frame::after{
+    right:-12px;
+}
+
+/* IMAGE */
+
+.frame img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    filter:
+    sepia(40%)
+    contrast(1.1)
+    brightness(0.95);
+
+    animation:zoom 8s ease-in-out infinite alternate;
+}
+
+@keyframes zoom{
+
+    from{
+        transform:scale(1);
+    }
+
+    to{
+        transform:scale(1.08);
+    }
+}
+
+/* ---------------- LETTER ---------------- */
+
+.letter{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:2s;
+
+    background:
+    rgba(0,0,0,0.78);
+
+    z-index:5;
+}
+
+.letter.show{
+
+    opacity:1;
+
+    pointer-events:auto;
+}
+
+/* PAPER */
+
+.paper{
+
+    width:100vw;
+    height:100vh;
+
+    background:url("vintage-paper.jpg");
+
+    background-size:cover;
+    background-position:center;
+
+    padding:70px 140px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+/* TITLE */
+
+.paper-title{
+
+    text-align:center;
+
+    font-size:3.8rem;
+
+    color:#ffffff;
+
+    font-family:'Parisienne',cursive;
+
+    margin-bottom:20px;
+}
+
+/* LETTER TEXT */
+
+.paper-text{
+
+    font-size:1.65rem;
+
+    color:#ffffff;
+
+    line-height:1.25;
+
+    white-space:pre-line;
+
+    max-width:1100px;
+
+    margin:auto;
+
+    font-family:'Parisienne',cursive;
+}
+
+/* CURSOR */
+
+.cursor{
+
+    display:inline-block;
+
+    width:3px;
+    height:24px;
+
+    background:#ffffff;
+
+    animation:blink 0.7s infinite;
+}
+
+@keyframes blink{
+
+    50%{
+        opacity:0;
+    }
+}
+
+/* SIGNATURE */
+
+.sign{
+
+    margin-top:40px;
+
+    text-align:right;
+
+    font-size:2.6rem;
+
+    color:#ffffff;
+
+    opacity:0;
+
+    transition:1s;
+
+    font-family:'Parisienne',cursive;
+
+    max-width:1100px;
+
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.sign.show{
+    opacity:1;
+}
+
+/* ---------------- FINAL FADE ---------------- */
+
+.final-fade{
+
+    position:fixed;
+
+    inset:0;
+
+    background:#000;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:2.5s ease;
+
+    z-index:20;
+}
+
+.final-fade.show{
+
+    opacity:1;
+
+    pointer-events:auto;
+}
+
+/* HEART */
+
+.heart-glow{
+
+    font-size:4rem;
+
+    margin-bottom:25px;
+
+    cursor:pointer;
+
+    animation:pulse 2s infinite;
+
+    filter:
+    drop-shadow(0 0 15px rgba(255,220,180,0.6));
+
+    transition:0.4s;
+}
+
+.heart-glow:hover{
+
+    transform:scale(1.15);
+
+    filter:
+    drop-shadow(0 0 25px rgba(255,220,180,1));
+}
+
+@keyframes pulse{
+
+    0%,100%{
+        transform:scale(1);
+        opacity:0.8;
+    }
+
+    50%{
+        transform:scale(1.15);
+        opacity:1;
+    }
+}
+
+/* FINAL TEXT */
+
+.final-text{
+
+    color:#f5e3c7;
+
+    font-size:2rem;
+
+    text-align:center;
+
+    font-family:'Parisienne',cursive;
+
+    letter-spacing:1px;
+
+    opacity:0;
+
+    animation:fadeFinalText 2s forwards;
+
+    animation-delay:1s;
+}
+
+@keyframes fadeFinalText{
+
+    to{
+        opacity:1;
+    }
+}
+
+/* CLICK TEXT */
+
+.click-text{
+
+    margin-top:18px;
+
+    color:#d9c2a3;
+
+    font-size:1rem;
+
+    letter-spacing:2px;
+
+    opacity:0.7;
+
+    animation:fadeBlink 2s infinite;
+}
+
+@keyframes fadeBlink{
+
+    0%,100%{
+        opacity:0.3;
+    }
+
+    50%{
+        opacity:1;
+    }
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    .intro-text{
+        font-size:2.2rem;
+    }
+
+    .film-strip{
+        gap:25px;
+        padding:0 30px;
+    }
+
+    .frame{
+        min-width:200px;
+        height:260px;
+    }
+
+    .paper{
+        padding:50px 25px;
+    }
+
+    .paper-title{
+        font-size:2.8rem;
+    }
+
+    .paper-text{
+        font-size:1.2rem;
+    }
+
+    .sign{
+        font-size:1.8rem;
+    }
+
+    .final-text{
+        font-size:1.5rem;
+        padding:0 20px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- INTRO -->
+
+<div class="intro" id="intro">
+
+<div class="intro-text">
+A few memories I never wanted to forget...
+</div>
+
+<button class="start-btn" onclick="startFilm()">
+START THE FILM
+</button>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main" id="main">
+
+<div class="projector-light"></div>
+
+<!-- FILM STRIP -->
+
+<div class="film-strip">
+
+<div class="frame">
+<img src="photo1.jpeg">
+</div>
+
+<div class="frame">
+<img src="photo2.jpeg">
+</div>
+
+<div class="frame">
+<img src="photo3.jpeg">
+</div>
+
+<div class="frame">
+<img src="photo4.jpeg">
+</div>
+
+<div class="frame">
+<img src="photo5.jpeg">
+</div>
+
+</div>
+
+<!-- LETTER -->
+
+<div class="letter" id="letter">
+
+<div class="paper">
+
+<div class="paper-title">
+hey my chan ...
+</div>
+
+<div class="paper-text" id="typing"></div>
+
+<div class="sign" id="sign">
+Yours Jaan💙 ✨
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- FINAL FADE -->
+
+<div class="final-fade" id="finalFade">
+
+<div class="heart-glow" onclick="openGiftPage()">
+🤎
+</div>
+
+<div class="final-text">
+Thank you for being part of my story...
+</div>
+
+<div class="click-text">
+click the heart ✨
+</div>
+
+</div>
+
+<!-- MUSIC -->
+
+<audio id="music" loop>
+<source src="music.mp3" type="audio/mp3">
+</audio>
+
+<script>
+
+/* DUST PARTICLES */
+
+for(let i=0;i<50;i++){
+
+    const dust=document.createElement("div");
+
+    dust.classList.add("dust");
+
+    dust.style.left=Math.random()*100+"%";
+
+    dust.style.animationDuration=
+    (Math.random()*10+10)+"s";
+
+    dust.style.animationDelay=
+    Math.random()*5+"s";
+
+    document.body.appendChild(dust);
+}
+
+/* START FILM */
+
+function startFilm(){
+
+    document.getElementById("intro")
+    .classList.add("hide");
+
+    document.getElementById("main")
+    .style.display="block";
+
+    document.getElementById("music").play();
+
+    /* SHOW LETTER */
+
+    setTimeout(()=>{
+
+        document.getElementById("letter")
+        .classList.add("show");
+
+        typeWriter();
+
+    },12000);
+}
+
+/* LETTER MESSAGE */
+
+const message = `Some people enter life quietly...
+but somehow change everything beautifully ✨
+
+this song is perfectly match for us especially the lyrics 🤎
+
+Avalum naanum,Amuthum thamizhum
+Avalum naanum,Alaiyum kadalum
+Avalum naanum,Thavamum arulum
+Avalum naanum,Vaerum maramum
+
+`;
+
+let i = 0;
+
+/* TYPEWRITER */
+
+function typeWriter(){
+
+    if(i < message.length){
+
+        document.getElementById("typing")
+        .innerHTML =
+        message.substring(0,i)
+        + '<span class="cursor"></span>';
+
+        i++;
+
+        setTimeout(typeWriter,130);
+    }
+
+    else{
+
+        document.getElementById("typing")
+        .innerHTML = message;
+
+        /* SHOW SIGNATURE */
+
+        document.getElementById("sign")
+        .classList.add("show");
+
+        /* FINAL FADE */
+
+        setTimeout(()=>{
+
+            document.getElementById("finalFade")
+            .classList.add("show");
+
+        },3500);
+    }
+}
+
+/* HEART CLICK */
+
+function openGiftPage(){
+
+    window.location.href = "boxes.html";
+}
+
+</script>
+
+</body>
+</html>
